@@ -136,7 +136,25 @@ export async function POST() {
     validFiles++;
   }
 
-  output.push("\n--- Step 6: Checking data-testid usage ---\n");
+  output.push("\n--- Step 6: Validating Fixture Files ---\n");
+  for (const fixtureFile of fixtureFiles) {
+    const filePath = path.join(testsDir, "fixtures", fixtureFile);
+    const content = fs.readFileSync(filePath, "utf-8");
+    const hasExports = content.includes("export ");
+    const hasTestData = content.includes("const ") || content.includes("interface ");
+
+    output.push(`  ${fixtureFile}:`);
+    output.push(`    - Has exports: ${hasExports ? "Yes" : "No"}`);
+    output.push(`    - Has test data: ${hasTestData ? "Yes" : "No"}`);
+
+    if (!hasExports) {
+      errors.push(`fixtures/${fixtureFile}: No exports found`);
+      issueCount++;
+    }
+    validFiles++;
+  }
+
+  output.push("\n--- Step 7: Checking data-testid usage ---\n");
   const allTestIds = new Set<string>();
   const allSpecContent = specFiles
     .map((f) => fs.readFileSync(path.join(testsDir, f), "utf-8"))
