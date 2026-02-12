@@ -39,7 +39,7 @@ export default function AdminDashboard() {
     return null;
   }
 
-  const triggerAgent = async (agentNum: 1 | 2) => {
+  const triggerAgent = (agentNum: 1 | 2) => {
     const setReport = agentNum === 1 ? setAgent1Report : setAgent2Report;
     setReport({
       status: "running",
@@ -48,23 +48,36 @@ export default function AdminDashboard() {
       summary: null,
     });
 
-    try {
-      const response = await fetch(`/api/agent${agentNum}`, { method: "POST" });
-      const data = await response.json();
-      setReport({
-        status: data.success ? "success" : "error",
-        output: data.output,
-        timestamp: new Date().toISOString(),
-        summary: data.summary,
-      });
-    } catch {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `/api/agent${agentNum}`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = () => {
+      try {
+        const data = JSON.parse(xhr.responseText);
+        setReport({
+          status: data.success ? "success" : "error",
+          output: data.output,
+          timestamp: new Date().toISOString(),
+          summary: data.summary,
+        });
+      } catch {
+        setReport({
+          status: "error",
+          output: "Failed to parse agent response.",
+          timestamp: new Date().toISOString(),
+          summary: null,
+        });
+      }
+    };
+    xhr.onerror = () => {
       setReport({
         status: "error",
         output: "Failed to connect to the agent service.",
         timestamp: new Date().toISOString(),
         summary: null,
       });
-    }
+    };
+    xhr.send();
   };
 
   const handleLogout = () => {

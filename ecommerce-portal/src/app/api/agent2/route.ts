@@ -19,12 +19,15 @@ export async function POST() {
   const errors: string[] = [];
 
   try {
+    const env = { ...process.env };
+    delete env.CI;
     const { stdout, stderr } = await execAsync(
       `npx playwright test --reporter=list 2>&1`,
       {
         cwd: projectRoot,
-        timeout: 120000,
-        env: { ...process.env, CI: "false" },
+        timeout: 180000,
+        maxBuffer: 10 * 1024 * 1024,
+        env,
       }
     );
     testOutput = stdout + stderr;
@@ -38,17 +41,9 @@ export async function POST() {
 
   for (const line of lines) {
     const trimmed = line.trim();
-    if (trimmed.startsWith("[chromium]") || trimmed.match(/^\d+\s+\[chromium\]/)) {
-      continue;
-    }
-    if (trimmed.match(/^[✓✘]/) || trimmed.match(/^\d+\s+[✓✘]/)) {
+    if (trimmed.includes("✓") || trimmed.includes("✘") || trimmed.includes("passed") || trimmed.includes("failed")) {
       resultLines.push(trimmed);
     }
-  }
-
-  for (const line of resultLines) {
-    if (line.includes("✓")) passed++;
-    if (line.includes("✘")) failed++;
   }
 
   const summaryMatch = testOutput.match(/(\d+) passed/);
@@ -63,7 +58,7 @@ export async function POST() {
   }
 
   if (failed > 0) {
-    output.push("\n--- Failed Test Details ---\n");
+    output.push("\n\n--- Failed Test Details ---\n");
     let inFailure = false;
     for (const line of lines) {
       if (line.match(/^\s+\d+\)/) || line.includes("Error:")) {
@@ -82,13 +77,13 @@ export async function POST() {
 
     const failedTests = resultLines.filter((l) => l.includes("✘"));
     failedTests.forEach((t) => {
-      const testName = t.replace(/.*✘\s*\d*\s*/, "").trim();
-      errors.push(testName);
+      const nameMatch = t.match(/›\s*([^›]+?)\s*\(/);
+      if (nameMatch) errors.push(nameMatch[1].trim());
     });
   }
 
-  const durationMatch = testOutput.match(/\(([^)]+)\)[\s]*$/m);
-  const duration = durationMatch ? durationMatch[1] : "N/A";
+  const durationMatch = testOutput.match(/(\d+) passed \(([^)]+)\)/);
+  const duration = durationMatch ? durationMatch[2] : "N/A";
 
   output.push("\n\n=== EXECUTION SUMMARY ===\n");
   output.push(`Total Tests: ${total}`);
