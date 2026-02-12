@@ -4,11 +4,7 @@ import { CartPage } from "./pages/CartPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { testUser } from "./fixtures/test-data";
 
-test.describe("Checkout Feature", () => {
-  test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-    await homePage.goto();
-    await homePage.addProductToCart(1);
+
   });
 
   test("should navigate to checkout from cart", async ({ page }) => {
