@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 
 export default function Header() {
   const { totalItems } = useCart();
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
@@ -21,6 +25,13 @@ export default function Header() {
               className="text-gray-700 hover:text-indigo-600 font-medium transition-colors"
             >
               Products
+            </Link>
+            <Link
+              href="/admin/login"
+              data-testid="nav-admin"
+              className="text-gray-700 hover:text-indigo-600 font-medium transition-colors"
+            >
+              Admin
             </Link>
             <Link
               href="/cart"
