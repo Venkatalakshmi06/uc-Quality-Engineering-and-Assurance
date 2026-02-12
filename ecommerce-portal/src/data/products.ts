@@ -1,0 +1,133 @@
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
+  rating: number;
+  inStock: boolean;
+}
+
+export const products: Product[] = [
+  {
+    id: 1,
+    name: "Classic White Sneakers",
+    description: "Premium leather white sneakers with cushioned sole. Perfect for everyday casual wear with superior comfort and durability.",
+    price: 89.99,
+    category: "Footwear",
+    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop",
+    rating: 4.5,
+    inStock: true,
+  },
+  {
+    id: 2,
+    name: "Wireless Bluetooth Headphones",
+    description: "Over-ear noise cancelling headphones with 30-hour battery life. Crystal clear sound and comfortable padding for extended use.",
+    price: 149.99,
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    rating: 4.7,
+    inStock: true,
+  },
+  {
+    id: 3,
+    name: "Organic Cotton T-Shirt",
+    description: "Soft organic cotton crew neck t-shirt. Available in multiple colors with a relaxed fit for maximum comfort.",
+    price: 29.99,
+    category: "Clothing",
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
+    rating: 4.3,
+    inStock: true,
+  },
+  {
+    id: 4,
+    name: "Stainless Steel Water Bottle",
+    description: "Double-walled vacuum insulated water bottle. Keeps drinks cold for 24 hours or hot for 12 hours. BPA-free and eco-friendly.",
+    price: 34.99,
+    category: "Accessories",
+    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+    rating: 4.6,
+    inStock: true,
+  },
+  {
+    id: 5,
+    name: "Leather Crossbody Bag",
+    description: "Genuine leather crossbody bag with adjustable strap. Multiple compartments for organized storage with a sleek design.",
+    price: 119.99,
+    category: "Accessories",
+    image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop",
+    rating: 4.4,
+    inStock: true,
+  },
+  {
+    id: 6,
+    name: "Smart Fitness Watch",
+    description: "Advanced fitness tracker with heart rate monitor, GPS, and sleep tracking. Water-resistant with a 7-day battery life.",
+    price: 199.99,
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+    rating: 4.8,
+    inStock: true,
+  },
+  {
+    id: 7,
+    name: "Bamboo Sunglasses",
+    description: "Eco-friendly bamboo frame sunglasses with polarized UV400 lenses. Lightweight and stylish for outdoor activities.",
+    price: 45.99,
+    category: "Accessories",
+    image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop",
+    rating: 4.2,
+    inStock: true,
+  },
+  {
+    id: 8,
+    name: "Premium Yoga Mat",
+    description: "Extra thick non-slip yoga mat with alignment lines. Made from eco-friendly TPE material with carrying strap included.",
+    price: 59.99,
+    category: "Sports",
+    image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=400&fit=crop",
+    rating: 4.5,
+    inStock: true,
+  },
+  {
+    id: 9,
+    name: "Ceramic Coffee Mug Set",
+    description: "Set of 4 handcrafted ceramic mugs in earth tones. Microwave and dishwasher safe with a comfortable handle grip.",
+    price: 39.99,
+    category: "Home",
+    image: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&h=400&fit=crop",
+    rating: 4.3,
+    inStock: true,
+  },
+  {
+    id: 10,
+    name: "Denim Jacket",
+    description: "Classic denim jacket with a modern slim fit. Features button closure, chest pockets, and durable cotton denim construction.",
+    price: 79.99,
+    category: "Clothing",
+    image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=400&fit=crop",
+    rating: 4.6,
+    inStock: true,
+  },
+  {
+    id: 11,
+    name: "Portable Bluetooth Speaker",
+    description: "Compact waterproof Bluetooth speaker with 360-degree sound. 12-hour playtime with built-in microphone for hands-free calls.",
+    price: 69.99,
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",
+    rating: 4.4,
+    inStock: true,
+  },
+  {
+    id: 12,
+    name: "Running Shoes Pro",
+    description: "Lightweight performance running shoes with responsive cushioning. Breathable mesh upper with reflective details for visibility.",
+    price: 129.99,
+    category: "Footwear",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop",
+    rating: 4.7,
+    inStock: true,
+  },
+];
