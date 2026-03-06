@@ -1,0 +1,14 @@
+node_modules/
+dist/
+reports/html/
+reports/allure-results/
+reports/allure-report/
+reports/extent/
+reports/screenshots/
+reports/*.log
+test-results/
+playwright-report/
+blob-report/
+.env
+.env.local
+*.tsbuildinfo
